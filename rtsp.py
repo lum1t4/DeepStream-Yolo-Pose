@@ -338,9 +338,9 @@ def main():
     tracker.set_property('tracker-width', 640)
     tracker.set_property('tracker-height', 384)
     tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so')
-    # tracker.set_property('ll-config-file',
-    #                      '/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_tracker_NvDCF_perf.yml')
-    tracker.set_property('ll-config-file', os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config_tracker_NvDCF_accuracy.yml'))
+    tracker.set_property('ll-config-file',
+                         '/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_tracker_NvDCF_perf.yml')
+    # tracker.set_property('ll-config-file', os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config_tracker_NvDCF_accuracy.yml'))
     tracker.set_property('display-tracking-id', 1)
     tracker.set_property('qos', 0)
     osd.set_property('process-mode', int(pyds.MODE_GPU))
