@@ -389,7 +389,7 @@ def main():
     pgie.link(tracker)
     tracker.link(converter)
     converter.link(osd)
-    osd.link(rtppay)
+    osd.link(encoder)
     encoder.link(rtppay)
     rtppay.link(sink)
 
