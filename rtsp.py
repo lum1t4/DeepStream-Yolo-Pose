@@ -394,6 +394,9 @@ def main():
         '( udpsrc name=pay0 port=%d buffer-size=524288 caps="application/x-rtp, media=video, clock-rate=90000, encoding-name=(string)%s, payload=96 " )'
         % (UPDSINK_PORT_NUM, OUTPUT_CODEC)
     )
+
+    print('( udpsrc name=pay0 port=%d buffer-size=524288 caps="application/x-rtp, media=video, clock-rate=90000, encoding-name=(string)%s, payload=96 " )'
+        % (UPDSINK_PORT_NUM, OUTPUT_CODEC))
     factory.set_shared(True)
     server.get_mount_points().add_factory("/ds-test", factory)
 
