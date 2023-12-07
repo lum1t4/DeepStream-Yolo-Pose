@@ -343,7 +343,7 @@ def main():
     sink.set_property("host", "224.224.255.255")
     sink.set_property("port", UPDSINK_PORT_NUM)
     sink.set_property("async", False)
-    sink.set_property("sync", 1)
+    sink.set_property("sync", 4)
 
     # sink.set_property('async', 0)
     # sink.set_property('sync', 0)
