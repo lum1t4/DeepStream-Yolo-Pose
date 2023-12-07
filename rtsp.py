@@ -304,6 +304,11 @@ def main():
         sys.stderr.write('ERROR: Failed to create udpsink\n')
         sys.exit(1)
 
+    encoder = Gst.ElementFactory.make("nvv4l2%senc"  % (OUTPUT_CODEC.lower(),), "encoder")
+    if not encoder:
+        sys.stderr.write('ERROR: Failed to create encoder\n')
+        sys.exit(1)
+        
     rtppay = Gst.ElementFactory.make("rtp%spay" % (OUTPUT_CODEC.lower(),), "rtppay")
     if not rtppay:
         sys.stderr.write('ERROR: Failed to create rtppay\n')
@@ -345,6 +350,11 @@ def main():
     sink.set_property("async", False)
     sink.set_property("sync", 1)
 
+    bitrate = 4000000
+    encoder.set_property("bitrate", bitrate)
+    if is_aarch64():
+        encoder.set_property("preset-level", 1)
+        encoder.set_property("insert-sps-pps", 1)
     # sink.set_property('async', 0)
     # sink.set_property('sync', 0)
     # sink.set_property('qos', 0)
@@ -371,6 +381,7 @@ def main():
     pipeline.add(tracker)
     pipeline.add(converter)
     pipeline.add(osd)
+    pipeline.add(encoder)
     pipeline.add(rtppay)
     pipeline.add(sink)
 
@@ -379,7 +390,9 @@ def main():
     tracker.link(converter)
     converter.link(osd)
     osd.link(rtppay)
+    encoder.link(rtppay)
     rtppay.link(sink)
+
 
     bus = pipeline.get_bus()
     bus.add_signal_watch()
